@@ -3,51 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="90dp"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical"
-    app:cardCornerRadius="10dp">
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="8dp"
+
+    app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bookItemLayout"
+        android:id="@+id/chapter_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/img_basketball"
+        android:background="@drawable/chapter_border"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/book_title"
+            android:id="@+id/chapter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Book Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/cardview_light_background"
+            android:text="Chapter Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/cardview_dark_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/book_description"
+            android:id="@+id/chapter_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Book Description"
-            android:textColor="@color/cardview_light_background"
+            android:text="Chapter Description"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/cardview_dark_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/book_title"
+            app:layout_constraintTop_toBottomOf="@+id/chapter_title"
             app:layout_constraintVertical_bias="0.845" />
 
         <ImageButton
-            android:id="@+id/more_button"
+            android:id="@+id/chapter_more_btn"
             style="?android:attr/actionOverflowButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="More"
             android:src="@drawable/ic_more_vert_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

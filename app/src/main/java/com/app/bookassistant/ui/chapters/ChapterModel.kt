@@ -2,17 +2,18 @@ package com.app.bookassistant.ui.chapters
 
 class ChapterModel {
     var chapterTitle: String = ""
-    var questions: List<Question> = mutableListOf()
+    var chapterDescripton: String = ""
+    var questionModels: List<QuestionModel> = mutableListOf()
 
-    class Question {
+    class QuestionModel {
         var questionTitle: String = ""
         var numberOfOptions: Int = 0
-        var questionOptions: List<Option> = mutableListOf()
-        var correctOption: Option =
-            Option()
+        var questionOptionModels: List<OptionModel> = mutableListOf()
+        var correctOptionModel: OptionModel =
+            OptionModel()
     }
 
-    class Option {
+    class OptionModel {
         var value: String = ""
     }
 }
