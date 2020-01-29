@@ -1,11 +1,13 @@
 package com.app.bookassistant
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.data.models.Book
+import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
     }
 
     override fun onBookClick(position: Int) {
-        Toast.makeText(this, "Clicked on: $position", Toast.LENGTH_SHORT).show()
+        //
+        startActivity(Intent(this, ChapterActivity::class.java))
     }
 }
