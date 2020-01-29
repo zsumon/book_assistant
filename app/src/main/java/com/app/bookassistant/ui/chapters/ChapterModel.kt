@@ -1,8 +1,6 @@
-package com.app.bookassistant.data.models
+package com.app.bookassistant.ui.chapters
 
-import javax.sql.StatementEvent
-
-class Chapter {
+class ChapterModel {
     var chapterTitle: String = ""
     var questions: List<Question> = mutableListOf()
 
@@ -10,7 +8,8 @@ class Chapter {
         var questionTitle: String = ""
         var numberOfOptions: Int = 0
         var questionOptions: List<Option> = mutableListOf()
-        var correctOption: Option = Option()
+        var correctOption: Option =
+            Option()
     }
 
     class Option {

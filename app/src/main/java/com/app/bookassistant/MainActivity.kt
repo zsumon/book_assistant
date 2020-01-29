@@ -3,10 +3,8 @@ package com.app.bookassistant
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.bookassistant.data.models.Book
+import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,9 +26,9 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
             bookListAdapter = BookListAdapter(this@MainActivity)
             adapter = bookListAdapter
         }
-        val items = mutableListOf<Book>()
+        val items = mutableListOf<BookModel>()
         for (i in 0..5) {
-            val b = Book()
+            val b = BookModel()
             b.apply {
                 title = "Book $i"
                 description = "Description of Book $i"
@@ -41,7 +39,6 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
     }
 
     override fun onBookClick(position: Int) {
-        //
         startActivity(Intent(this, ChapterActivity::class.java))
     }
 }

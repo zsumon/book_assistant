@@ -5,14 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
-import com.app.bookassistant.data.models.Book
 import kotlinx.android.synthetic.main.dashboard_books.view.*
 
 
 class BookListAdapter(private val onBookListener: OnBookListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var bookList: List<Book> = mutableListOf()
+    private var bookModelList: List<BookModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListViewHolder(
@@ -26,17 +25,17 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BookListViewHolder -> {
-                holder.bind(bookList[position])
+                holder.bind(bookModelList[position])
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return bookList.size
+        return bookModelList.size
     }
 
-    fun supplyBookList(bookList: List<Book>) {
-        this.bookList = bookList
+    fun supplyBookList(bookModelList: List<BookModel>) {
+        this.bookModelList = bookModelList
     }
 
 
@@ -70,9 +69,9 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
             itemView.setOnClickListener(this)
         }
 
-        fun bind(book: Book) {
-            bookTitle.text = book.title
-            bookDescriptor.text = book.description
+        fun bind(bookModel: BookModel) {
+            bookTitle.text = bookModel.title
+            bookDescriptor.text = bookModel.description
 
             setBackground()
         }
