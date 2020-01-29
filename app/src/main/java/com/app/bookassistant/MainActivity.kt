@@ -9,7 +9,7 @@ import com.app.bookassistant.data.models.Book
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
 
     private lateinit var bookListAdapter: BookListAdapter
 
@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         initDashboardBookList()
     }
 
-    fun initDashboardBookList() {
+    private fun initDashboardBookList() {
         dashboardBookListRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            bookListAdapter = BookListAdapter()
+            bookListAdapter = BookListAdapter(this@MainActivity)
             adapter = bookListAdapter
         }
         val items = mutableListOf<Book>()
@@ -36,8 +36,9 @@ class MainActivity : AppCompatActivity() {
             items.add(b)
         }
         bookListAdapter.supplyBookList(items)
+    }
 
-        //
-        /// bookListAdapter.notifyDataSetChanged()
+    override fun onBookClick(position: Int) {
+        Toast.makeText(this, "Clicked on: $position", Toast.LENGTH_SHORT).show()
     }
 }
