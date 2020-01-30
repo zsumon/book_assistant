@@ -18,8 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/chapter_border"
-        android:clickable="true"
-        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/chapter_img"
