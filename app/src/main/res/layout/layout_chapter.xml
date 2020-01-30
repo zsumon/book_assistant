@@ -21,19 +21,44 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:padding="10dp">
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chapter_img"
+        app:layout_constraintTop_toBottomOf="@+id/chapter_img">
+
+        <ImageView
+            android:id="@+id/chapter_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_book_web"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chapter_title"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.166" />
 
         <TextView
             android:id="@+id/chapter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
             android:text="Chapter Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/cardview_dark_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.163" />
+
+        <!--        <View-->
+        <!--            android:paddingLeft="-10dp"-->
+        <!--            android:id="@+id/view"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:background="#c0c0c0"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/chapter_description"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/chapter_title"-->
+        <!--            tools:layout_editor_absoluteX="10dp" />-->
 
         <TextView
             android:id="@+id/chapter_description"
@@ -53,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="More"
-            android:src="@drawable/ic_more_vert_black_24dp"
+            android:src="@drawable/ic_more_vert_dark_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
