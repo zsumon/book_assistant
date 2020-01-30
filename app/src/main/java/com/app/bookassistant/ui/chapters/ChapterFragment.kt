@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
+import kotlinx.android.synthetic.main.fragment_chapter.*
 
 
 class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
@@ -21,13 +21,15 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val rootView = inflater.inflate(R.layout.fragment_chapter, container, false)
-        initChapterRecyclerView(rootView)
-
-        return rootView
+        return inflater.inflate(R.layout.fragment_chapter, container, false)
     }
 
-    private fun initChapterRecyclerView(rootView: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initChapterRecyclerView()
+    }
+
+    private fun initChapterRecyclerView() {
         val items = mutableListOf<ChapterModel>()
         for (i in 0..5) {
             val ch = ChapterModel()
@@ -37,9 +39,8 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
             }
             items.add(ch)
         }
-
-        val chapterRecyclerView: RecyclerView = rootView.findViewById(R.id.chapter_recyclerView)
-        chapterRecyclerView.apply {
+//        val chapterRecyclerView: RecyclerView = rootView.findViewById(R.id.chapter_recyclerView)
+        chapter_recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             chapterAdapter = ChapterAdapter(this@ChapterFragment)
             adapter = chapterAdapter
@@ -49,6 +50,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     override fun onChapterClick(position: Int) {
         Toast.makeText(context, "Clicked: $position", Toast.LENGTH_SHORT).show()
+        /// make transition to question fragment...
     }
 
 
