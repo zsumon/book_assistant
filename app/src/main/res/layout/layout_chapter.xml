@@ -26,40 +26,40 @@
 
         <ImageView
             android:id="@+id/chapter_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:src="@drawable/ic_book_web"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/chapter_title"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.156"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.166" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/chapter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
+            android:layout_marginStart="76dp"
             android:text="Chapter Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/cardview_dark_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.163" />
+            app:layout_constraintVertical_bias="0.175" />
 
         <TextView
             android:id="@+id/chapter_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
             android:text="Chapter Description"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/cardview_dark_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chapter_title"
-            app:layout_constraintVertical_bias="0.845" />
+            app:layout_constraintVertical_bias="0.263" />
 
         <ImageButton
             android:id="@+id/chapter_more_btn"
