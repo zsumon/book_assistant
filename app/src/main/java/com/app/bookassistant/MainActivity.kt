@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
             adapter = bookListAdapter
         }
         val items = mutableListOf<BookModel>()
-        for (i in 0..5) {
+        for (i in 0..2) {
             val b = BookModel()
             b.apply {
                 title = "Book $i"
