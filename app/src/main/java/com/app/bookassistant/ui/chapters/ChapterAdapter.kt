@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
-import kotlinx.android.synthetic.main.layout_chapter.view.*
+import kotlinx.android.synthetic.main.item_chapter.view.*
 
 class ChapterAdapter(private val onChapterListener: OnChapterListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -15,7 +15,7 @@ class ChapterAdapter(private val onChapterListener: OnChapterListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ChapterViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.layout_chapter, parent, false
+                R.layout.item_chapter, parent, false
             ), onChapterListener
         )
     }

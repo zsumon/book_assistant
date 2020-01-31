@@ -1,12 +1,14 @@
 package com.app.bookassistant.ui.chapters
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
 import kotlinx.android.synthetic.main.fragment_chapter.*
@@ -15,17 +17,18 @@ import kotlinx.android.synthetic.main.fragment_chapter.*
 class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     private lateinit var chapterAdapter: ChapterAdapter
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
         Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chapter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         initChapterRecyclerView()
     }
 
@@ -39,7 +42,6 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
             }
             items.add(ch)
         }
-//        val chapterRecyclerView: RecyclerView = rootView.findViewById(R.id.chapter_recyclerView)
         chapter_recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             chapterAdapter = ChapterAdapter(this@ChapterFragment)
@@ -50,7 +52,8 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     override fun onChapterClick(position: Int) {
         Toast.makeText(context, "Clicked: $position", Toast.LENGTH_SHORT).show()
-        /// make transition to question fragment...
+        val bundle: Bundle = bundleOf(Pair("book_and_chapter", "Book1"))
+        navController.navigate(R.id.action_chapterFragment_to_questionFragment, bundle)
     }
 
 
