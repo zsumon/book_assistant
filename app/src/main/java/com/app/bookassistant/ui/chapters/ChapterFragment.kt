@@ -51,7 +51,6 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
     }
 
     override fun onChapterClick(position: Int) {
-        Toast.makeText(context, "Clicked: $position", Toast.LENGTH_SHORT).show()
         val bundle: Bundle = bundleOf(Pair("book_and_chapter", "Book1"))
         navController.navigate(R.id.action_chapterFragment_to_questionFragment, bundle)
     }

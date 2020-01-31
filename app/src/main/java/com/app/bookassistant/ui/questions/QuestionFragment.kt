@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.chapters.ChapterModel.QuestionModel
 import kotlinx.android.synthetic.main.fragment_question.*
 
-class QuestionFragment : Fragment(), QuestionAdapter.OnQuestionOptionClickListener {
+class QuestionFragment : Fragment(), QuestionAdapter.OnQuestionClickListener {
 
     private lateinit var questionAdapter: QuestionAdapter
 
@@ -43,8 +44,12 @@ class QuestionFragment : Fragment(), QuestionAdapter.OnQuestionOptionClickListen
         questionAdapter.supplyQuestions(items)
     }
 
-    override fun onQuestionOptionClick(position: Int) {
-
+    override fun onShowCorrectAnswerClick(questionPosition: Int) {
+        Toast.makeText(context, "Clicked to show answer for: $questionPosition", Toast.LENGTH_SHORT)
+            .show()
     }
 
+    override fun onQuestionOptionClick(questionPosition: Int, selectedOption: Int) {
+
+    }
 }

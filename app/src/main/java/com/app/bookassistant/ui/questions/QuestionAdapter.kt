@@ -1,13 +1,15 @@
 package com.app.bookassistant.ui.questions
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.chapters.ChapterModel.QuestionModel
+import kotlinx.android.synthetic.main.item_question.view.*
 
-class QuestionAdapter(private val onQuestionOptionClickListener: OnQuestionOptionClickListener) :
+class QuestionAdapter(private val onQuestionClickListener: OnQuestionClickListener) :
     RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>() {
 
     private var allQuestions: List<QuestionModel> = mutableListOf()
@@ -18,7 +20,7 @@ class QuestionAdapter(private val onQuestionOptionClickListener: OnQuestionOptio
                 R.layout.item_question,
                 parent,
                 false
-            ), onQuestionOptionClickListener
+            ), onQuestionClickListener
         )
     }
 
@@ -35,18 +37,29 @@ class QuestionAdapter(private val onQuestionOptionClickListener: OnQuestionOptio
     }
 
     class QuestionViewHolder(
-        private val itemView: View,
-        private val onQuestionOptionClickListener: OnQuestionOptionClickListener
-    ) : RecyclerView.ViewHolder(itemView) {
+        itemView: View,
+        private val onQuestionClickListener: OnQuestionClickListener
+    ) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        init {
+            itemView.button_show_correct_answer.setOnClickListener(this)
+        }
 
         fun bind(questionModel: QuestionModel) {
             // TODO
         }
 
+        override fun onClick(v: View?) {
+            if (v?.id == R.id.button_show_correct_answer) {
+                onQuestionClickListener.onShowCorrectAnswerClick(adapterPosition)
+            }
+        }
+
     }
 
-    interface OnQuestionOptionClickListener {
-        fun onQuestionOptionClick(position: Int)
+    interface OnQuestionClickListener {
+        fun onShowCorrectAnswerClick(questionPosition: Int)
+        fun onQuestionOptionClick(questionPosition: Int, selectedOption: Int)
     }
 
 }

@@ -41,7 +41,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
 
     class BookListViewHolder constructor(
         itemView: View,
-        private var onBookListener: OnBookListener
+        private val onBookListener: OnBookListener
     ) :
         RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
