@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -34,7 +33,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     private fun initChapterRecyclerView() {
         val items = mutableListOf<ChapterModel>()
-        for (i in 0..5) {
+        for (i in 0..3) {
             val ch = ChapterModel()
             ch.apply {
                 chapterTitle = "Chapter $i"

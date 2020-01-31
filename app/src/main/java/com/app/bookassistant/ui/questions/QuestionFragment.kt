@@ -47,6 +47,7 @@ class QuestionFragment : Fragment(), QuestionAdapter.OnQuestionClickListener {
     override fun onShowCorrectAnswerClick(questionPosition: Int) {
         Toast.makeText(context, "Clicked to show answer for: $questionPosition", Toast.LENGTH_SHORT)
             .show()
+
     }
 
     override fun onQuestionOptionClick(questionPosition: Int, selectedOption: Int) {

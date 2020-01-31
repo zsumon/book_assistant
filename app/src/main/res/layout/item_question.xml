@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_question_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -89,5 +90,29 @@
         app:rippleColor="@color/DarkGray"
         app:strokeColor="@color/BlueViolet"
         app:strokeWidth="1dp" />
+
+    <TextView
+        android:id="@+id/text_correct_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Correct answer is: Option1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button_show_correct_answer"
+        app:layout_constraintTop_toBottomOf="@+id/button_show_correct_answer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_answer_explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Explanation: None"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/text_correct_answer"
+        app:layout_constraintTop_toBottomOf="@+id/text_correct_answer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

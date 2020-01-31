@@ -1,6 +1,6 @@
 package com.app.bookassistant.ui.questions
 
-import android.util.Log
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,10 +51,26 @@ class QuestionAdapter(private val onQuestionClickListener: OnQuestionClickListen
 
         override fun onClick(v: View?) {
             if (v?.id == R.id.button_show_correct_answer) {
+                /// show/hide correct answer & explanations
                 onQuestionClickListener.onShowCorrectAnswerClick(adapterPosition)
+                toggleCorrectAnswer()
             }
         }
 
+        private fun toggleCorrectAnswer() {
+            if (itemView.button_show_correct_answer.text == "Show Correct Answer") {
+                itemView.button_show_correct_answer.text = "Hide Correct Answer"
+
+                itemView.text_correct_answer.visibility = View.VISIBLE
+                itemView.text_answer_explanation.visibility = View.VISIBLE
+                itemView.text_answer_explanation.text = "Explanation: None"
+                itemView.text_correct_answer.text = "Correct answer is: Option 1"
+            } else {
+                itemView.button_show_correct_answer.text = "Show Correct Answer"
+                itemView.text_correct_answer.visibility = View.GONE
+                itemView.text_answer_explanation.visibility = View.GONE
+            }
+        }
     }
 
     interface OnQuestionClickListener {
