@@ -44,7 +44,15 @@ class QuestionFragment : Fragment(), QuestionAdapter.OnQuestionOptionClickListen
     }
 
     override fun onQuestionOptionClick(position: Int) {
-
+        val str: String = "#include <stdio.h>\n" +
+                "    int main()\n" +
+                "    {\n" +
+                "        int a = 10;\n" +
+                "        double b = 5.6;\n" +
+                "        int c;\n" +
+                "        c = a + b;\n" +
+                "        printf(\"%d\", c);\n" +
+                "    }"
     }
 
 }

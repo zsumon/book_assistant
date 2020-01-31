@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
-import kotlinx.android.synthetic.main.dashboard_books.view.*
+import kotlinx.android.synthetic.main.item_books.view.*
 
 
 class BookListAdapter(private val onBookListener: OnBookListener) :
@@ -16,7 +16,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.dashboard_books, parent, false
+                R.layout.item_books, parent, false
             ), onBookListener
         )
     }
