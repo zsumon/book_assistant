@@ -1,4 +1,4 @@
-package com.app.bookassistant.ui.test
+package com.app.bookassistant.ui.exam
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
