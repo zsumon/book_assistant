@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_books.view.*
 class BookListAdapter(private val onBookListener: OnBookListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var bookModelList: List<BookModel> = mutableListOf()
+    private var bookList: List<BookModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListViewHolder(
@@ -25,17 +25,17 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BookListViewHolder -> {
-                holder.bind(bookModelList[position])
+                holder.bind(bookList[position])
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return bookModelList.size
+        return bookList.size
     }
 
-    fun supplyBookList(bookModelList: List<BookModel>) {
-        this.bookModelList = bookModelList
+    fun supplyBookList(bookList: List<BookModel>) {
+        this.bookList = bookList
     }
 
 
@@ -69,9 +69,9 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
             itemView.setOnClickListener(this)
         }
 
-        fun bind(bookModel: BookModel) {
-            bookTitle.text = bookModel.title
-            bookDescriptor.text = bookModel.description
+        fun bind(book: BookModel) {
+            bookTitle.text = book.title
+            bookDescriptor.text = book.description
 
             setBackground()
         }

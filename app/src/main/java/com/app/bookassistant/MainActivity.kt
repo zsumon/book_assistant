@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.chapters.ChapterActivity
+import com.app.bookassistant.ui.chapters.ChapterModel
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,11 +29,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
         }
         val items = mutableListOf<BookModel>()
         for (i in 0..2) {
-            val b = BookModel()
-            b.apply {
-                title = "Book $i"
-                description = "Description of Book $i"
-            }
+            val b = BookModel("b123", "Hello Book", "Description", null)
             items.add(b)
         }
         bookListAdapter.supplyBookList(items)
