@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.chapters.ChapterActivity
-import com.app.bookassistant.ui.chapters.ChapterModel
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
