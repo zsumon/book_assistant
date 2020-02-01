@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/chapter_bottom_menu_chapter"
+        android:icon="@drawable/ic_study"
+        android:iconTint="@color/White"
+        android:title="Chapter"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/chapter_bottom_menu_test"
+        android:icon="@drawable/ic_exam"
+        android:iconTint="@color/White"
+        android:title="Test"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_cart"
+        android:icon="@drawable/ic_more_vert_light_24dp"
+        android:iconTint="@color/White"
+        android:title="More"
+        app:showAsAction="always" />
+
+</menu>

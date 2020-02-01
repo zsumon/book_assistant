@@ -73,12 +73,12 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
             bookTitle.text = book.title
             bookDescriptor.text = book.description
 
-            setBackground()
+            setBackground(adapterPosition % IMGS.size)
         }
 
-        private fun setBackground() {
-            val ran = (0 until IMGS.size).random()
-            bookItemLayout.setBackgroundResource(IMGS[ran])
+        private fun setBackground(pos: Int) {
+            // val ran = (0 until IMGS.size).random()
+            bookItemLayout.setBackgroundResource(IMGS[pos])
         }
 
         override fun onClick(v: View?) {

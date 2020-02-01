@@ -9,7 +9,4 @@ class SharedViewModel : ViewModel() {
     private lateinit var selectedBook: BookModel
     private lateinit var selectedChapter: ChapterModel
 
-
-
-
 }
