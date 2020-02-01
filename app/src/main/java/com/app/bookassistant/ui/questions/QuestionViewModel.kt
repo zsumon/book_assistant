@@ -6,6 +6,9 @@ import com.app.bookassistant.ui.chapters.ChapterModel
 
 class QuestionViewModel : ViewModel() {
 
-    lateinit var questionList: MutableLiveData<List<ChapterModel.QuestionModel>>
+    var questionList: MutableLiveData<List<ChapterModel.QuestionModel>> = MutableLiveData()
+    var selectedAnswers: MutableLiveData<List<Pair<Int, Int>>> = MutableLiveData()
+    var correctAnswerVisibility: MutableLiveData<List<Pair<Int, Int>>> = MutableLiveData()
+
 
 }

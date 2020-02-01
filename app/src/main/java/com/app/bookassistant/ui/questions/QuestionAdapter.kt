@@ -29,7 +29,7 @@ class QuestionAdapter(private val onQuestionClickListener: OnQuestionClickListen
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
-
+        holder.bind(QuestionModel())
     }
 
     fun supplyQuestions(items: List<QuestionModel>) {
@@ -54,6 +54,8 @@ class QuestionAdapter(private val onQuestionClickListener: OnQuestionClickListen
                 /// show/hide correct answer & explanations
                 onQuestionClickListener.onShowCorrectAnswerClick(adapterPosition)
                 toggleCorrectAnswer()
+
+                //maybe get previous state from viewModel and change accordingly
             }
         }
 
