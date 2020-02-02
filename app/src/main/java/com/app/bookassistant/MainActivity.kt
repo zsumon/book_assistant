@@ -27,10 +27,13 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
             adapter = bookListAdapter
         }
         val items = mutableListOf<BookModel>()
-        for (i in 0..2) {
-            val b = BookModel("b123", "Hello Book", "Description", null)
-            items.add(b)
-        }
+
+        var b = BookModel("cse101", "Computer Fundamentals", "Introduction to computers", null)
+        items.add(b)
+        b = BookModel("cse102", "Programming & Problem Solving", "Programming in C", null)
+        items.add(b)
+        b = BookModel("cse103", "Math", "Basic Math", null)
+        items.add(b)
         bookListAdapter.supplyBookList(items)
     }
 
