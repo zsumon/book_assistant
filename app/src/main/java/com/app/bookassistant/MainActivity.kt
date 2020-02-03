@@ -3,6 +3,7 @@ package com.app.bookassistant
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.chapters.ChapterActivity
@@ -39,5 +40,9 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
 
     override fun onBookClick(position: Int) {
         startActivity(Intent(this, ChapterActivity::class.java))
+    }
+
+    override fun onMoreButtonClick(bookPosition: Int, menuId: Int) {
+        Toast.makeText(this, "$bookPosition -- $menuId", Toast.LENGTH_SHORT).show()
     }
 }

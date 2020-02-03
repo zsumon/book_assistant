@@ -1,11 +1,16 @@
 package com.app.bookassistant.ui.dashboard
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bookassistant.MainActivity
 import com.app.bookassistant.R
 import kotlinx.android.synthetic.main.item_books.view.*
+import java.time.LocalDate
 
 
 class BookListAdapter(private val onBookListener: OnBookListener) :
@@ -67,6 +72,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
 
         init {
             itemView.setOnClickListener(this)
+            itemView.more_button.setOnClickListener(this)
         }
 
         fun bind(book: BookModel) {
@@ -82,12 +88,31 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
         }
 
         override fun onClick(v: View?) {
-            onBookListener.onBookClick(adapterPosition)
+            if (v?.id == R.id.more_button) {
+                val popup = PopupMenu(onBookListener as MainActivity, itemView.more_button)
+                popup.inflate(R.menu.book_more_menu)
+                popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                    override fun onMenuItemClick(item: MenuItem): Boolean {
+                        return when (item.getItemId()) {
+                            R.id.book_update -> {
+                                onBookListener.onMoreButtonClick(adapterPosition, R.id.more_button)
+                                return true
+                            }
+                            else -> false
+                        }
+                    }
+                })
+                popup.show()
+            } else {
+                Log.d("TAG", " view id is: " + v?.id.toString())
+                onBookListener.onBookClick(adapterPosition)
+            }
         }
     }
 
     interface OnBookListener {
         fun onBookClick(position: Int)
+        fun onMoreButtonClick(bookPosition: Int, menuId: Int)
     }
 
 }
