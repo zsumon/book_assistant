@@ -60,6 +60,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         val fragmentManager = activity!!.supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, QuestionFragment())
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 }
