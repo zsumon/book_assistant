@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import com.app.bookassistant.R
 
-class TestFragment : Fragment() {
+class ExamFragment : Fragment() {
 
     //TODO("Set up Bottom Nav For test & chapter navigation.. in chapter activity")
     override fun onCreateView(
