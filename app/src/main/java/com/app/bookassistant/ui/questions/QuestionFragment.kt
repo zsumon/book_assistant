@@ -23,7 +23,7 @@ class QuestionFragment : Fragment(), QuestionAdapter.OnQuestionClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        super.onCreateView(inflater, container, savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(QuestionViewModel::class.java)
         viewModel.selectedAnswers.observe(this) {
             //

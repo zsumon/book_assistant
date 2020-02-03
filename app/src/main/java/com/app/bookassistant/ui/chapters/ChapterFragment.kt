@@ -1,6 +1,9 @@
 package com.app.bookassistant.ui.chapters
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +13,25 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
+import com.app.bookassistant.ui.questions.QuestionFragment
 import kotlinx.android.synthetic.main.fragment_chapter.*
 
 
 class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     private lateinit var chapterAdapter: ChapterAdapter
-    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
         Bundle?
     ): View? {
+
+
         return inflater.inflate(R.layout.fragment_chapter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
         initChapterRecyclerView()
     }
 
@@ -51,8 +55,11 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     override fun onChapterClick(position: Int) {
         val bundle: Bundle = bundleOf(Pair("book_and_chapter", "Book1"))
-        navController.navigate(R.id.action_chapterFragment_to_questionFragment, bundle)
+
+        /// transaction to Question fragment
+        val fragmentManager = activity!!.supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, QuestionFragment())
+        fragmentTransaction.commit()
     }
-
-
 }
