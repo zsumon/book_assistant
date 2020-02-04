@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.chapters.ChapterActivity
@@ -19,6 +20,15 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
         setContentView(R.layout.activity_main)
 
         initDashboardBookList()
+        initDrawers()
+    }
+
+    private fun initDrawers() {
+        setSupportActionBar(toolbar_bookList)
+        val toggle = ActionBarDrawerToggle(
+            this, dl_bookList, toolbar_bookList, 0, 0
+        )
+        toggle.isDrawerIndicatorEnabled = true
     }
 
     private fun initDashboardBookList() {
