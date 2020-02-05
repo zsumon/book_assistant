@@ -40,8 +40,8 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         for (i in 0..3) {
             val ch = ChapterModel()
             ch.apply {
-                chapterTitle = "Chapter $i"
-                chapterDescripton = "Description of Chapter $i"
+                chapterTitle = "Chapter ${i + 1}"
+                chapterDescripton = "Description of Chapter ${i + 1}"
             }
             items.add(ch)
         }
