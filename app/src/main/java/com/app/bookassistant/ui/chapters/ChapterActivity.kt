@@ -19,6 +19,8 @@ class ChapterActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, fragment)
         fragmentTransaction.commit()
 
+        setSupportActionBar(toolbar_chapter)
+
         initBottomNav()
     }
 

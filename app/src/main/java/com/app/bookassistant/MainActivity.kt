@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
         )
         toggle.isDrawerIndicatorEnabled = true
         toggle.syncState()
+        toggle.drawerArrowDrawable.color = resources.getColor(R.color.White)
+
     }
 
     private fun initDashboardBookList() {

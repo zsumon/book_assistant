@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Courses"></item>
-    <item android:title="About"></item>
     <item android:title="Books"></item>
+    <item android:title="About"></item>
 
 </menu>

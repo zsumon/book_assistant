@@ -1,16 +1,12 @@
 package com.app.bookassistant.ui.chapters
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.questions.QuestionFragment
@@ -30,6 +26,10 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val title = "Chapters"
+        (activity as AppCompatActivity?)?.supportActionBar?.title = title
+
         initChapterRecyclerView()
     }
 

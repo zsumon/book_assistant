@@ -13,7 +13,7 @@
         android:id="@+id/chapter_bottom_menu_exam"
         android:icon="@drawable/ic_exam"
         android:iconTint="@color/White"
-        android:title="Test"
+        android:title="Exam"
         app:showAsAction="always" />
 
     <item

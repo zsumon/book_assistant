@@ -18,7 +18,8 @@
             android:paddingBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_bookList"
-            tools:layout_editor_absoluteX="124dp" />
+            tools:layout_editor_absoluteX="124dp"
+            tools:listitem="@layout/item_books" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_book"
