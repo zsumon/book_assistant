@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.exam.ExamActivity"></activity>
         <activity
             android:name=".ui.chapters.ChapterActivity"
-            android:configChanges="orientation"></activity>
+            android:configChanges="orientation" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

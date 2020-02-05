@@ -25,8 +25,6 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
         Bundle?
     ): View? {
-
-
         return inflater.inflate(R.layout.fragment_chapter, container, false)
     }
 

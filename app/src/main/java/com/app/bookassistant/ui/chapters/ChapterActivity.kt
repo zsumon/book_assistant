@@ -3,7 +3,7 @@ package com.app.bookassistant.ui.chapters
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.app.bookassistant.R
-import com.app.bookassistant.ui.exam.ExamFragment
+import com.app.bookassistant.ui.exam.ExamMakerFragment
 import kotlinx.android.synthetic.main.activity_chapter.*
 
 class ChapterActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class ChapterActivity : AppCompatActivity() {
                     val fragmentManager = supportFragmentManager
                     val fragmentTransaction = fragmentManager.beginTransaction()
                     fragmentTransaction.replace(
-                        R.id.chapter_fragment_container_frameLayout, ExamFragment()
+                        R.id.chapter_fragment_container_frameLayout, ExamMakerFragment()
                     )
                     fragmentTransaction.commit()
                     true
