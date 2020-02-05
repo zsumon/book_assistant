@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.questions.QuestionFragment
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_chapter.*
 
 
@@ -31,11 +35,12 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         (activity as AppCompatActivity?)?.supportActionBar?.title = title
 
         initChapterRecyclerView()
+        initPieChart()
     }
 
     private fun initChapterRecyclerView() {
         val items = mutableListOf<ChapterModel>()
-        for (i in 0..3) {
+        for (i in 0..10) {
             val ch = ChapterModel()
             ch.apply {
                 chapterTitle = "Chapter ${i + 1}"
@@ -47,8 +52,34 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
             layoutManager = LinearLayoutManager(context)
             chapterAdapter = ChapterAdapter(this@ChapterFragment)
             adapter = chapterAdapter
+            isNestedScrollingEnabled = false
         }
         chapterAdapter.supplyChapters(items)
+    }
+
+    private fun initPieChart(): Unit {
+        val yvalues = ArrayList<Entry>()
+        yvalues += Entry(8 f, 0)
+        yvalues += Entry(15f, 1)
+        yvalues += Entry(12f, 2)
+        yvalues += Entry(25f, 3)
+        yvalues += Entry(17f, 4)
+
+        val dataSet = PieDataSet(yvalues, "Recent Scores")
+
+        val xVals = ArrayList<String>()
+
+        xVals.add("Exam 1")
+        xVals.add("Exam 2")
+        xVals.add("Exam 3")
+        xVals.add("Exam 4")
+        xVals.add("Exam 5")
+
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS)
+
+        val data = PieData(xVals, dataSet)
+        chapter_performance_piechart.data = data
+
     }
 
     override fun onChapterClick(position: Int) {
