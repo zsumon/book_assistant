@@ -1,6 +1,9 @@
 package com.app.bookassistant.ui.chapters
 
+import android.graphics.PorterDuff
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.exam.ExamMakerFragment
@@ -12,17 +15,33 @@ class ChapterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
-        /// transaction to chapter fragment
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = ChapterFragment()
         fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, fragment)
-        // fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
-        setSupportActionBar(toolbar_chapter)
-
+        initToolbar()
         initBottomNav()
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar_chapter)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        val upArrow = resources.getDrawable(R.drawable.ic_arrow_back_white_24dp)
+        upArrow.setColorFilter(resources.getColor(R.color.White), PorterDuff.Mode.SRC_ATOP)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
+
+        // supportActionBar?
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_SHORT).show()
+        onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initBottomNav() {
@@ -53,4 +72,6 @@ class ChapterActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }
