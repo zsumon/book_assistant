@@ -17,6 +17,7 @@ class ChapterActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = ChapterFragment()
         fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, fragment)
+        // fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
         setSupportActionBar(toolbar_chapter)
@@ -33,6 +34,7 @@ class ChapterActivity : AppCompatActivity() {
                     fragmentTransaction.replace(
                         R.id.chapter_fragment_container_frameLayout, ChapterFragment()
                     )
+                    fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
                     true
                 }
@@ -42,6 +44,7 @@ class ChapterActivity : AppCompatActivity() {
                     fragmentTransaction.replace(
                         R.id.chapter_fragment_container_frameLayout, ExamMakerFragment()
                     )
+                    fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
                     true
                 }

@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
     }
 
     override fun onMoreButtonClick(bookPosition: Int, menuId: Int) {
-        Toast.makeText(this, "$bookPosition -- $menuId", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$bookPosition", Toast.LENGTH_SHORT).show()
 
         // notify viewModel about click and update from server/repository
     }

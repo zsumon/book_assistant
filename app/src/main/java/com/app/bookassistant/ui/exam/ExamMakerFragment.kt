@@ -27,7 +27,7 @@ class ExamMakerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val title = "Exam"
+        val title = "Select Chapters for Exam"
         (activity as AppCompatActivity?)?.supportActionBar?.title = title
 
         initChapterListRecView()
