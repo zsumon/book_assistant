@@ -1,14 +1,17 @@
 package com.app.bookassistant
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.BookListAdapter
+import com.app.bookassistant.ui.dashboard.BookModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
@@ -26,9 +29,14 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
     private fun initDrawers() {
         setSupportActionBar(toolbar_bookList)
         val toggle = ActionBarDrawerToggle(
-            this, dl_bookList, toolbar_bookList, 0, 0
+            this,
+            dl_bookList,
+            toolbar_bookList,
+            R.string.app_name,
+            R.string.app_name
         )
         toggle.isDrawerIndicatorEnabled = true
+        toggle.syncState()
     }
 
     private fun initDashboardBookList() {
