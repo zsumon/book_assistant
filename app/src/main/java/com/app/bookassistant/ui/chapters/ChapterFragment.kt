@@ -58,8 +58,10 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
     }
 
     private fun initPieChart(): Unit {
+
+        // https://www.studytutorial.in/android-pie-chart-using-mpandroid-library-tutorial
         val yvalues = ArrayList<Entry>()
-        yvalues += Entry(8 f, 0)
+        yvalues += Entry(8f, 0)
         yvalues += Entry(15f, 1)
         yvalues += Entry(12f, 2)
         yvalues += Entry(25f, 3)
@@ -79,6 +81,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
 
         val data = PieData(xVals, dataSet)
         chapter_performance_piechart.data = data
+        chapter_performance_piechart.setDescription("Recent Exam Scores")
 
     }
 
