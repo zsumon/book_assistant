@@ -2,12 +2,9 @@ package com.app.bookassistant
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.BookListAdapter
@@ -24,6 +21,14 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
 
         initDashboardBookList()
         initDrawers()
+
+        initFab()
+    }
+
+    private fun initFab() {
+        fab_add_book.setOnClickListener {
+            Toast.makeText(this, "Add new Book", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initDrawers() {

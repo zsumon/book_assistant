@@ -67,7 +67,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         yvalues += Entry(25f, 3)
         yvalues += Entry(17f, 4)
 
-        val dataSet = PieDataSet(yvalues, "Recent Scores")
+        val dataSet = PieDataSet(yvalues, "") //"Recent Scores"
 
         val xVals = ArrayList<String>()
 
