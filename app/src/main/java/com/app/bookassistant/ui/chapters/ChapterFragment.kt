@@ -1,5 +1,6 @@
 package com.app.bookassistant.ui.chapters
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.questions.QuestionFragment
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
+import im.dacer.androidcharts.LineView
 import kotlinx.android.synthetic.main.fragment_chapter.*
+import java.util.ArrayList
 
 
 class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
@@ -35,7 +34,7 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         (activity as AppCompatActivity?)?.supportActionBar?.title = title
 
         initChapterRecyclerView()
-        initPieChart()
+        initLineChart(view)
     }
 
     private fun initChapterRecyclerView() {
@@ -57,31 +56,23 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         chapterAdapter.supplyChapters(items)
     }
 
-    private fun initPieChart(): Unit {
+    private fun initLineChart(view: View) {
+        // https://github.com/HackPlan/AndroidCharts#usage
+        val bottomList =
+            mutableListOf("Exam 1", "Exam 2", "Exam 3", "Exam 4")
+        val dataLists: ArrayList<ArrayList<Int>> = ArrayList(ArrayList())
 
-        // https://www.studytutorial.in/android-pie-chart-using-mpandroid-library-tutorial
-        val yvalues = ArrayList<Entry>()
-        yvalues += Entry(8f, 0)
-        yvalues += Entry(15f, 1)
-        yvalues += Entry(12f, 2)
-        yvalues += Entry(25f, 3)
-        yvalues += Entry(17f, 4)
+        dataLists.add(ArrayList(mutableListOf(18, 15, 19, 14)))
 
-        val dataSet = PieDataSet(yvalues, "") //"Recent Scores"
 
-        val xVals = ArrayList<String>()
+        val lineView = view.findViewById<LineView>(R.id.line_view)
+        lineView.setDrawDotLine(false) //optional
+        lineView.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY) //optional
 
-        xVals.add("Exam 1")
-        xVals.add("Exam 2")
-        xVals.add("Exam 3")
-        xVals.add("Exam 4")
-        xVals.add("Exam 5")
+        lineView.setBottomTextList(bottomList as ArrayList<String>?)
+        lineView.setColorArray(intArrayOf(Color.CYAN, Color.BLACK, Color.GREEN, Color.GRAY))
+        lineView.setDataList(dataLists) //or lineView.setFloatDataList(floatDataLists)
 
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS)
-
-        val data = PieData(xVals, dataSet)
-        chapter_performance_piechart.data = data
-        chapter_performance_piechart.setDescription("Recent Exam Scores")
 
     }
 
