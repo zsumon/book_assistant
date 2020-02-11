@@ -59,10 +59,21 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
     private fun initLineChart(view: View) {
         // https://github.com/HackPlan/AndroidCharts#usage
         val bottomList =
-            mutableListOf("Exam 1", "Exam 2", "Exam 3", "Exam 4")
+            mutableListOf(
+                "Exam 1",
+                "Exam 2",
+                "Exam 3",
+                "Exam 4",
+                "Exam 5",
+                "Exam 6",
+                "Exam 7",
+                "Exam 8",
+                "Exam 9",
+                "Exam 10"
+            )
         val dataLists: ArrayList<ArrayList<Int>> = ArrayList(ArrayList())
 
-        dataLists.add(ArrayList(mutableListOf(18, 15, 19, 14)))
+        dataLists.add(ArrayList(mutableListOf(95, 86, 26, 55, 88, 65, 85, 76, 48, 82)))
 
 
         val lineView = view.findViewById<LineView>(R.id.line_view)
@@ -70,8 +81,11 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
         lineView.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY) //optional
 
         lineView.setBottomTextList(bottomList as ArrayList<String>?)
-        lineView.setColorArray(intArrayOf(Color.CYAN, Color.BLACK, Color.GREEN, Color.GRAY))
+        lineView.setColorArray(intArrayOf(Color.GREEN, Color.CYAN, Color.BLACK, Color.GRAY))
         lineView.setDataList(dataLists) //or lineView.setFloatDataList(floatDataLists)
+
+        lineView.bottom = 0
+        lineView.top = 0
 
 
     }

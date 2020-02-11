@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.BookListAdapter
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
 
     private fun initDashboardBookList() {
         dashboardBookListRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = GridLayoutManager(this@MainActivity, 2)
             bookListAdapter = BookListAdapter(this@MainActivity)
             adapter = bookListAdapter
         }
