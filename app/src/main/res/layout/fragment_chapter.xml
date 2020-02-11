@@ -14,8 +14,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="8dp"
             android:text="100"
             app:layout_constraintStart_toStartOf="@+id/horizontalScrollView"
             app:layout_constraintTop_toTopOf="parent" />

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.chapters.ChapterActivity
+import com.app.bookassistant.ui.dashboard.AvailableCoursesAdapter
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import com.app.bookassistant.ui.dashboard.BookModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
 
     private lateinit var bookListAdapter: BookListAdapter
+    private lateinit var availableCoursesAdapter: AvailableCoursesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +26,26 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
         initDrawers()
 
         initFab()
+
+        initMoreAvailableCourseList()
+    }
+
+    private fun initMoreAvailableCourseList() {
+        available_courses_list.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            availableCoursesAdapter = AvailableCoursesAdapter()
+            adapter = availableCoursesAdapter
+        }
+
+        val items = mutableListOf("Item 1", "Item 2", "Item 3")
+        availableCoursesAdapter.supplyList(items)
+
     }
 
     private fun initFab() {
-        fab_add_book.setOnClickListener {
+        /*fab_add_book.setOnClickListener {
             Toast.makeText(this, "Add new Book", Toast.LENGTH_SHORT).show()
-        }
+        }*/
     }
 
     private fun initDrawers() {
@@ -60,6 +76,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
         b = BookModel("cse102", "Programming & Problem Solving", "Programming in C", null)
         items.add(b)
         b = BookModel("cse103", "Math", "Basic Math", null)
+        items.add(b)
+        b = BookModel("cse104", "Data Structures", "Data Structures", null)
         items.add(b)
         bookListAdapter.supplyBookList(items)
     }
