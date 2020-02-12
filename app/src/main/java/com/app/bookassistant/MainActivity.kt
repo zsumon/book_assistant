@@ -2,6 +2,7 @@ package com.app.bookassistant
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +14,13 @@ import com.app.bookassistant.ui.dashboard.BookListAdapter
 import com.app.bookassistant.ui.dashboard.BookModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
+class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
+    AvailableCoursesAdapter.OnAvailableBookListener {
 
     private lateinit var bookListAdapter: BookListAdapter
     private lateinit var availableCoursesAdapter: AvailableCoursesAdapter
+    private lateinit var enrolledBooks: BookModel
+    private lateinit var availableBooks: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,17 +31,18 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
 
         initFab()
 
-        initMoreAvailableCourseList()
+        initAvailableCourseList()
     }
 
-    private fun initMoreAvailableCourseList() {
+    private fun initAvailableCourseList() {
         available_courses_list.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            availableCoursesAdapter = AvailableCoursesAdapter()
+            availableCoursesAdapter = AvailableCoursesAdapter(this@MainActivity)
             adapter = availableCoursesAdapter
         }
 
         val items = mutableListOf("Item 1", "Item 2", "Item 3")
+        availableBooks = items
         availableCoursesAdapter.supplyList(items)
 
     }
@@ -90,5 +95,22 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener {
         Toast.makeText(this, "$bookPosition", Toast.LENGTH_SHORT).show()
 
         // notify viewModel about click and update from server/repository
+    }
+
+    override fun onAvailableBookClick(position: Int) {
+        // now add this to enrolled class..
+        var str = ""
+        try {
+            str = availableBooks[position]
+        } catch (e: Exception) {
+            Log.d("TAG", e.toString())
+        }
+        availableCoursesAdapter.removeItem(position)
+        val b = BookModel(
+            "id_123",
+            str,
+            "Description of: $str", null
+        )
+        bookListAdapter.addBook(b)
     }
 }

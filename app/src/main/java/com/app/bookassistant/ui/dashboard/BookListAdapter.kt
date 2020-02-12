@@ -43,6 +43,11 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
         this.bookList = bookList
     }
 
+    fun addBook(book: BookModel) {
+        this.bookList += book
+        notifyDataSetChanged()
+    }
+
 
     class BookListViewHolder constructor(
         itemView: View,

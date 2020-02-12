@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
 
-class AvailableCoursesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AvailableCoursesAdapter(private val onAvailableBookListener: OnAvailableBookListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var availableCourse: MutableList<String>
+    lateinit var availableCourse: MutableList<String>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(
@@ -24,10 +25,21 @@ class AvailableCoursesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        holder.itemView.setOnClickListener {
+            onAvailableBookListener.onAvailableBookClick(position)
+        }
+
     }
 
     fun supplyList(items: MutableList<String>) {
         availableCourse = items
+    }
+
+    fun removeItem(position: Int) {
+        if (position >= 0 && position < availableCourse.size) {
+            availableCourse.removeAt(position)
+            notifyDataSetChanged()
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,5 +49,8 @@ class AvailableCoursesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     }
 
+    interface OnAvailableBookListener {
+        fun onAvailableBookClick(position: Int)
+    }
 
 }
