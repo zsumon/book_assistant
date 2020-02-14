@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.MainActivity
 import com.app.bookassistant.R
 import kotlinx.android.synthetic.main.item_books.view.*
+import java.lang.Float
 import java.time.LocalDate
 
 
@@ -90,6 +91,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
         private fun setBackground(pos: Int) {
             // val ran = (0 until IMGS.size).random()
             bookItemLayout.setBackgroundResource(IMGS[pos])
+            bookItemLayout.alpha = Float.parseFloat("50.0")
         }
 
         override fun onClick(v: View?) {

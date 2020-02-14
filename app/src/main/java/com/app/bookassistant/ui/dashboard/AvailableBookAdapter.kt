@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
 
-class AvailableCoursesAdapter(private val onAvailableBookListener: OnAvailableBookListener) :
+class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    lateinit var availableCourse: MutableList<String>
+    lateinit var availableBook: MutableList<String>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(
@@ -20,7 +20,7 @@ class AvailableCoursesAdapter(private val onAvailableBookListener: OnAvailableBo
     }
 
     override fun getItemCount(): Int {
-        return availableCourse.size
+        return availableBook.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -32,12 +32,12 @@ class AvailableCoursesAdapter(private val onAvailableBookListener: OnAvailableBo
     }
 
     fun supplyList(items: MutableList<String>) {
-        availableCourse = items
+        availableBook = items
     }
 
     fun removeItem(position: Int) {
-        if (position >= 0 && position < availableCourse.size) {
-            availableCourse.removeAt(position)
+        if (position >= 0 && position < availableBook.size) {
+            availableBook.removeAt(position)
             notifyDataSetChanged()
         }
     }

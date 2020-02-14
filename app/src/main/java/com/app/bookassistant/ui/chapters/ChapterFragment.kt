@@ -30,8 +30,8 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val title = "Chapters"
-        (activity as AppCompatActivity?)?.supportActionBar?.title = title
+        /*val title = "Chapters"
+        (activity as AppCompatActivity?)?.supportActionBar?.title = title*/
 
         initChapterRecyclerView()
         initLineChart(view)

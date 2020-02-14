@@ -9,24 +9,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.chapters.ChapterActivity
-import com.app.bookassistant.ui.dashboard.AvailableCoursesAdapter
+import com.app.bookassistant.ui.dashboard.AvailableBookAdapter
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import com.app.bookassistant.ui.dashboard.BookModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
-    AvailableCoursesAdapter.OnAvailableBookListener {
+    AvailableBookAdapter.OnAvailableBookListener {
 
     private lateinit var bookListAdapter: BookListAdapter
-    private lateinit var availableCoursesAdapter: AvailableCoursesAdapter
-    private lateinit var enrolledBooks: BookModel
+    private lateinit var availableBookAdapter: AvailableBookAdapter
     private lateinit var availableBooks: MutableList<String>
+    private lateinit var enrolleBooks: MutableList<BookModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initDashboardBookList()
+        initEnrolledBookList()
         initDrawers()
 
         initFab()
@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     private fun initAvailableCourseList() {
         available_courses_list.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            availableCoursesAdapter = AvailableCoursesAdapter(this@MainActivity)
-            adapter = availableCoursesAdapter
+            availableBookAdapter = AvailableBookAdapter(this@MainActivity)
+            adapter = availableBookAdapter
         }
 
         val items = mutableListOf("Item 1", "Item 2", "Item 3")
         availableBooks = items
-        availableCoursesAdapter.supplyList(items)
+        availableBookAdapter.supplyList(items)
 
     }
 
@@ -68,27 +68,36 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     }
 
-    private fun initDashboardBookList() {
+    private fun initEnrolledBookList() {
         dashboardBookListRecyclerView.apply {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             bookListAdapter = BookListAdapter(this@MainActivity)
             adapter = bookListAdapter
         }
-        val items = mutableListOf<BookModel>()
+        enrolleBooks = mutableListOf()
 
         var b = BookModel("cse101", "Computer Fundamentals", "Introduction to computers", null)
-        items.add(b)
+        enrolleBooks.add(b)
         b = BookModel("cse102", "Programming & Problem Solving", "Programming in C", null)
-        items.add(b)
+        enrolleBooks.add(b)
         b = BookModel("cse103", "Math", "Basic Math", null)
-        items.add(b)
+        enrolleBooks.add(b)
         b = BookModel("cse104", "Data Structures", "Data Structures", null)
-        items.add(b)
-        bookListAdapter.supplyBookList(items)
+        enrolleBooks.add(b)
+        bookListAdapter.supplyBookList(enrolleBooks)
     }
 
     override fun onBookClick(position: Int) {
-        startActivity(Intent(this, ChapterActivity::class.java))
+
+        val intent = Intent(this, ChapterActivity::class.java)
+        var clickedBook = "DEFAULT"
+        try {
+            clickedBook = enrolleBooks[position].title
+        } catch (e: Exception) {
+            Log.d("TAG", e.toString())
+        }
+        intent.putExtra("book_name", clickedBook)
+        startActivity(intent)
     }
 
     override fun onMoreButtonClick(bookPosition: Int, menuId: Int) {
@@ -105,7 +114,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         } catch (e: Exception) {
             Log.d("TAG", e.toString())
         }
-        availableCoursesAdapter.removeItem(position)
+        availableBookAdapter.removeItem(position)
         val b = BookModel(
             "id_123",
             str,

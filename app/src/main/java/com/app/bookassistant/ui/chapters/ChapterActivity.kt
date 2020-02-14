@@ -5,24 +5,43 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.app.bookassistant.R
+import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.exam.ExamMakerFragment
 import kotlinx.android.synthetic.main.activity_chapter.*
 
 class ChapterActivity : AppCompatActivity() {
 
+    lateinit var sharedViewModel: SharedViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chapter)
 
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+
+        fragmentTransaction()
+        initToolbar()
+        initBottomNav()
+        _getIntent()
+    }
+
+    private fun _getIntent() {
+        val temp = intent.getStringExtra("book_name")
+        val bookName: String = if (temp.isNullOrEmpty()) " " else temp
+
+        sharedViewModel.selectedBook.value =
+            BookModel("id_123", bookName, "Description of $bookName", null)
+        supportActionBar?.title = bookName
+    }
+
+    private fun fragmentTransaction() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = ChapterFragment()
         fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, fragment)
         fragmentTransaction.commit()
-
-        initToolbar()
-        initBottomNav()
     }
 
     private fun initToolbar() {
@@ -33,8 +52,6 @@ class ChapterActivity : AppCompatActivity() {
         val upArrow = resources.getDrawable(R.drawable.ic_arrow_back_white_24dp)
         upArrow.setColorFilter(resources.getColor(R.color.White), PorterDuff.Mode.SRC_ATOP)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
-
-        // supportActionBar?
     }
 
 
