@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
             adapter = availableBookAdapter
         }
 
-        val items = mutableListOf("Item 1", "Item 2", "Item 3")
+        val items = mutableListOf("Data Mining", "Computer Graphics", "Introduction to Algorithms")
         availableBooks = items
         availableBookAdapter.supplyList(items)
 
@@ -120,6 +120,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
             str,
             "Description of: $str", null
         )
-        bookListAdapter.addBook(b)
+
+        enrolleBooks.add(b)
+        bookListAdapter.notifyDataSetChanged()
     }
 }
