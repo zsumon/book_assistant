@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         val b = BookModel(
             "id_123",
             str,
-            "Description of: $str", null
+            str, null
         )
 
         enrolleBooks.add(b)

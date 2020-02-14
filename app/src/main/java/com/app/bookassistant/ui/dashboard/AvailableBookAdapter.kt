@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.R
+import kotlinx.android.synthetic.main.item_available_book.view.*
 
 class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -12,9 +13,9 @@ class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookL
     lateinit var availableBook: MutableList<String>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(
+        return AvailableViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_books, parent, false
+                R.layout.item_available_book, parent, false
             )
         )
     }
@@ -25,8 +26,13 @@ class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookL
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.setOnClickListener {
-            onAvailableBookListener.onAvailableBookClick(position)
+        when (holder) {
+            is AvailableViewHolder -> {
+                holder.bind(availableBook[position])
+                holder.itemView.setOnClickListener {
+                    onAvailableBookListener.onAvailableBookClick(position)
+                }
+            }
         }
 
     }
@@ -42,11 +48,10 @@ class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookL
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind() {
-
+    class AvailableViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(bookName: String) {
+            itemView.available_book_item_title.text = bookName
         }
-
     }
 
     interface OnAvailableBookListener {
