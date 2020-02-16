@@ -3,6 +3,7 @@ package com.app.bookassistant
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -123,5 +124,9 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
         enrolleBooks.add(b)
         bookListAdapter.notifyDataSetChanged()
+    }
+
+    fun uploadBook(view: View) {
+        // upload new book
     }
 }
