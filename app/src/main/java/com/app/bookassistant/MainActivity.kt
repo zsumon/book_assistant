@@ -13,6 +13,7 @@ import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.AvailableBookAdapter
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import com.app.bookassistant.ui.dashboard.BookModel
+import com.app.bookassistant.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
@@ -126,7 +127,21 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         bookListAdapter.notifyDataSetChanged()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 111 && resultCode == RESULT_OK) {
+            val selectedFile = data?.data //The uri with the location of the file
+            toast("Selected: $selectedFile");
+        }
+    }
+
     fun uploadBook(view: View) {
         // upload new book
+
+        val intent = Intent()
+            .setType("*/*")
+            .setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
     }
 }
