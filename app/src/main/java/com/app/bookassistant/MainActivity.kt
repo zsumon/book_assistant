@@ -1,20 +1,31 @@
 package com.app.bookassistant
 
+import android.Manifest
+import android.annotation.TargetApi
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.AvailableBookAdapter
 import com.app.bookassistant.ui.dashboard.BookListAdapter
 import com.app.bookassistant.ui.dashboard.BookModel
+import com.app.bookassistant.utils.CSVUtil
+import com.app.bookassistant.utils.Constants
 import com.app.bookassistant.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     AvailableBookAdapter.OnAvailableBookListener {
@@ -129,19 +140,30 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 111 && resultCode == RESULT_OK) {
-            val selectedFile = data?.data //The uri with the location of the file
-            toast("Selected: $selectedFile");
+        if (requestCode == Constants.SELECT_CSV_FILE && resultCode == RESULT_OK && data != null) {
+            val selectedUri = data.data //The uri with the location of the file
+            if (selectedUri != null) {
+                var _path = selectedUri.path
+                _path = _path?.substring(_path.indexOf(":") + 1)
+                val file = File(_path!!)
+                val stringBuffer = CSVUtil.readFile(file)
+                toast(stringBuffer.toString())
+            } else {
+                val msg = "Null filename data received!"
+                toast(msg)
+            }
         }
     }
 
     fun uploadBook(view: View) {
-        // upload new book
+        requestPermissionForFile()
 
-        val intent = Intent()
-            .setType("*/*")
-            .setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+        // upload new book
+        CSVUtil.selectCSVFile(this)
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun requestPermissionForFile() {
+        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
     }
 }
