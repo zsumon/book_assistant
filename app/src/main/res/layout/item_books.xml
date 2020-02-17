@@ -21,7 +21,6 @@
         android:padding="10dp">
 
 
-
         <TextView
             android:id="@+id/book_title"
             android:layout_width="wrap_content"
@@ -41,7 +40,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:text="Book Description"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/Gray"
             app:layout_constraintBottom_toTopOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="@+id/book_title"
             app:layout_constraintHorizontal_bias="0.472"

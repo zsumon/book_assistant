@@ -45,7 +45,7 @@ class ChapterAdapter(private val onChapterListener: OnChapterListener) :
 
         private val chapterTitle = itemView.chapter_title
         private val chapterDescription = itemView.chapter_description
-        private val moreBtn = itemView.chapter_more_btn
+        //        private val moreBtn = itemView.chapter_more_btn
         private val chapterLayout = itemView.chapter_layout
 
         init {
