@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bookassistant.MainActivity
 import com.app.bookassistant.R
@@ -73,19 +74,19 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
 
         private val bookTitle = itemView.book_title
         private val bookDescriptor = itemView.book_description
-        private val moreBtn = itemView.more_button
+        private val moreBtn = itemView.sync_img
         private val bookItemLayout = itemView.bookItemLayout
 
         init {
             itemView.setOnClickListener(this)
-            itemView.more_button.setOnClickListener(this)
+            itemView.sync_img.setOnClickListener(this)
         }
 
         fun bind(book: BookModel) {
             bookTitle.text = book.title
             bookDescriptor.text = book.description
 
-            setBackground(adapterPosition % IMGS.size)
+            // setBackground(adapterPosition % IMGS.size)
         }
 
         private fun setBackground(pos: Int) {
@@ -95,21 +96,8 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
         }
 
         override fun onClick(v: View?) {
-            if (v?.id == R.id.more_button) {
-                val popup = PopupMenu(onBookListener as MainActivity, itemView.more_button)
-                popup.inflate(R.menu.book_more_menu)
-                popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-                    override fun onMenuItemClick(item: MenuItem): Boolean {
-                        return when (item.getItemId()) {
-                            R.id.book_update -> {
-                                onBookListener.onMoreButtonClick(adapterPosition, R.id.more_button)
-                                return true
-                            }
-                            else -> false
-                        }
-                    }
-                })
-                popup.show()
+            if (v?.id == R.id.sync_img) {
+                onBookListener.onMoreButtonClick(adapterPosition, v.id)
             } else {
                 Log.d("TAG", " view id is: " + v?.id.toString())
                 onBookListener.onBookClick(adapterPosition)

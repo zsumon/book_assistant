@@ -83,7 +83,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     private fun initEnrolledBookList() {
         dashboardBookListRecyclerView.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, 2)
+            /*layoutManager = GridLayoutManager(this@MainActivity, 2)*/
+            layoutManager = LinearLayoutManager(this@MainActivity)
             bookListAdapter = BookListAdapter(this@MainActivity)
             adapter = bookListAdapter
         }
