@@ -6,5 +6,5 @@ data class BookModel(
     var bookId: String,
     var title: String,
     var description: String,
-    var chapters: List<ChapterModel>?
+    var chapters: MutableList<ChapterModel> = mutableListOf()
 )
