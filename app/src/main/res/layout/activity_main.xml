@@ -39,17 +39,21 @@
                     android:id="@+id/dashboardBookListRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:clipToPadding="false"
+                    android:paddingBottom="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar_bookList" />
 
                 <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/more_books_textview"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:background="@color/White"
+                    android:gravity="center"
+                    android:padding="5dp"
                     android:text="More Available Books"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorAccent"
                     app:layout_constraintBottom_toTopOf="@id/available_courses_list"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView4" />
+                    app:layout_constraintTop_toBottomOf="@id/more_books_textview" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

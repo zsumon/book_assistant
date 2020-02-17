@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.bookassistant.ui.addbook.AddBookFragment
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.AvailableBookAdapter
 import com.app.bookassistant.ui.dashboard.BookListAdapter
@@ -114,8 +115,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         startActivity(intent)
     }
 
-    override fun onMoreButtonClick(bookPosition: Int, menuId: Int) {
-        Toast.makeText(this, "$bookPosition", Toast.LENGTH_SHORT).show()
+    override fun onUpdateButtonClick(bookPosition: Int, menuId: Int) {
+        Toast.makeText(this, "Updating", Toast.LENGTH_LONG).show()
 
         // notify viewModel about click and update from server/repository
     }
@@ -148,7 +149,10 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
                 _path = _path?.substring(_path.indexOf(":") + 1)
                 val file = File(_path!!)
                 val stringBuffer = CSVUtil.readFile(file)
-                toast(stringBuffer.toString())
+                /// toast(stringBuffer.toString())
+
+                AddBookFragment().show(supportFragmentManager, null)
+
             } else {
                 val msg = "No file selected"
                 toast(msg)

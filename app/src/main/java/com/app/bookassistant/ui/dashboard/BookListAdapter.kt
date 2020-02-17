@@ -2,17 +2,12 @@ package com.app.bookassistant.ui.dashboard
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.app.bookassistant.MainActivity
 import com.app.bookassistant.R
 import kotlinx.android.synthetic.main.item_books.view.*
 import java.lang.Float
-import java.time.LocalDate
 
 
 class BookListAdapter(private val onBookListener: OnBookListener) :
@@ -97,7 +92,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
 
         override fun onClick(v: View?) {
             if (v?.id == R.id.sync_img) {
-                onBookListener.onMoreButtonClick(adapterPosition, v.id)
+                onBookListener.onUpdateButtonClick(adapterPosition, v.id)
             } else {
                 Log.d("TAG", " view id is: " + v?.id.toString())
                 onBookListener.onBookClick(adapterPosition)
@@ -107,7 +102,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
 
     interface OnBookListener {
         fun onBookClick(position: Int)
-        fun onMoreButtonClick(bookPosition: Int, menuId: Int)
+        fun onUpdateButtonClick(bookPosition: Int, menuId: Int)
     }
 
 }
