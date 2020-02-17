@@ -23,7 +23,7 @@ import java.io.File
 
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
-    AvailableBookAdapter.OnAvailableBookListener {
+    AvailableBookAdapter.OnAvailableBookListener, AddBookFragment.OnFinalizeUploadListener {
 
     private lateinit var bookListAdapter: BookListAdapter
     private lateinit var availableBookAdapter: AvailableBookAdapter
@@ -130,19 +130,11 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
                 _path = _path?.substring(_path.indexOf(":") + 1)
 
                 val book = CSVUtil.parseBookFromCSV(_path!!)
-
-                toast(book?.title!!)
-
-                val bundle = Bundle()
-                bundle.putString("book_title", book.title)
-                val addBookFragment = AddBookFragment()
-                addBookFragment.arguments = bundle
-                addBookFragment.show(supportFragmentManager, null)
-
-
+                val addBookFragment = AddBookFragment(this)
+                addBookFragment.setUploadedBookInfo(book!!)
+                addBookFragment.show(supportFragmentManager, "")
             } else {
-                val msg = "No file selected"
-                toast(msg)
+                toast("No file selected")
             }
         }
     }
@@ -159,5 +151,11 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
             Constants.REQUEST_FOR_SDCARD_READ
         )
+    }
+
+    override fun onFinalUploadClick(book: BookModel) {
+        toast("New book added under available books.")
+        availableBooks.add(book.title)
+        availableBookAdapter.notifyDataSetChanged()
     }
 }
