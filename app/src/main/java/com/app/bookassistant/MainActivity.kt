@@ -3,18 +3,12 @@ package com.app.bookassistant
 import android.Manifest
 import android.annotation.TargetApi
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.ui.addbook.AddBookFragment
 import com.app.bookassistant.ui.chapters.ChapterActivity
@@ -34,7 +28,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     private lateinit var bookListAdapter: BookListAdapter
     private lateinit var availableBookAdapter: AvailableBookAdapter
     private lateinit var availableBooks: MutableList<String>
-    private lateinit var enrolleBooks: MutableList<BookModel>
+    private lateinit var enrolledBooks: MutableList<BookModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +36,6 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
         initEnrolledBookList()
         initDrawers()
-
-        initFab()
 
         initAvailableCourseList()
     }
@@ -61,12 +53,6 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     }
 
-    private fun initFab() {
-        /*fab_add_book.setOnClickListener {
-            Toast.makeText(this, "Add new Book", Toast.LENGTH_SHORT).show()
-        }*/
-    }
-
     private fun initDrawers() {
         setSupportActionBar(toolbar_bookList)
         val toggle = ActionBarDrawerToggle(
@@ -79,7 +65,6 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         toggle.isDrawerIndicatorEnabled = true
         toggle.syncState()
         toggle.drawerArrowDrawable.color = resources.getColor(R.color.White)
-
     }
 
     private fun initEnrolledBookList() {
@@ -89,69 +74,71 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
             bookListAdapter = BookListAdapter(this@MainActivity)
             adapter = bookListAdapter
         }
-        enrolleBooks = mutableListOf()
+        enrolledBooks = mutableListOf()
 
-        var b = BookModel("cse101", "Computer Fundamentals", "Introduction to computers", null)
-        enrolleBooks.add(b)
-        b = BookModel("cse102", "Programming & Problem Solving", "Programming in C", null)
-        enrolleBooks.add(b)
-        b = BookModel("cse103", "Math", "Basic Math", null)
-        enrolleBooks.add(b)
-        b = BookModel("cse104", "Data Structures", "Data Structures", null)
-        enrolleBooks.add(b)
-        bookListAdapter.supplyBookList(enrolleBooks)
+        var b = BookModel(
+            "cse101",
+            "Computer Fundamentals",
+            "Introduction to computers",
+            mutableListOf()
+        )
+        enrolledBooks.add(b)
+        b = BookModel(
+            "cse102",
+            "Programming & Problem Solving",
+            "Programming in C",
+            mutableListOf()
+        )
+        enrolledBooks.add(b)
+        b = BookModel("cse103", "Math", "Basic Math", mutableListOf())
+        enrolledBooks.add(b)
+        b = BookModel("cse104", "Data Structures", "Data Structures", mutableListOf())
+        enrolledBooks.add(b)
+        bookListAdapter.supplyBookList(enrolledBooks)
     }
 
     override fun onBookClick(position: Int) {
 
         val intent = Intent(this, ChapterActivity::class.java)
-        var clickedBook = "DEFAULT"
-        try {
-            clickedBook = enrolleBooks[position].title
-        } catch (e: Exception) {
-            Log.d("TAG", e.toString())
-        }
+        val clickedBook = enrolledBooks[position].title
         intent.putExtra("book_name", clickedBook)
         startActivity(intent)
     }
 
     override fun onUpdateButtonClick(bookPosition: Int, menuId: Int) {
         Toast.makeText(this, "Updating", Toast.LENGTH_LONG).show()
-
         // notify viewModel about click and update from server/repository
     }
 
     override fun onAvailableBookClick(position: Int) {
         // now add this to enrolled class..
-        var str = ""
-        try {
-            str = availableBooks[position]
-        } catch (e: Exception) {
-            Log.d("TAG", e.toString())
-        }
+        val str = availableBooks[position]
         availableBookAdapter.removeItem(position)
-        val b = BookModel(
-            "id_123",
-            str,
-            str, null
-        )
+        val b = BookModel("id_123", str, str, mutableListOf())
 
-        enrolleBooks.add(b)
+        enrolledBooks.add(b)
         bookListAdapter.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == Constants.SELECT_CSV_FILE && resultCode == RESULT_OK && data != null) {
             val selectedUri = data.data //The uri with the location of the file
             if (selectedUri != null) {
                 var _path = selectedUri.path
                 _path = _path?.substring(_path.indexOf(":") + 1)
-                val file = File(_path!!)
-                val stringBuffer = CSVUtil.readFile(file)
-                /// toast(stringBuffer.toString())
 
-                AddBookFragment().show(supportFragmentManager, null)
+                val book = CSVUtil.parseBookFromCSV(_path!!)
+
+                toast(book?.title!!)
+
+                val bundle = Bundle()
+                bundle.putString("book_title", book.title)
+                val addBookFragment = AddBookFragment()
+                addBookFragment.arguments = bundle
+                addBookFragment.show(supportFragmentManager, null)
+
 
             } else {
                 val msg = "No file selected"
@@ -162,7 +149,6 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     fun uploadBook(view: View) {
         requestPermissionForFile()
-
         // upload new book
         CSVUtil.selectCSVFile(this)
     }

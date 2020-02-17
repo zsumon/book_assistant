@@ -32,7 +32,7 @@ class ChapterActivity : AppCompatActivity() {
         val bookName: String = if (temp.isNullOrEmpty()) " " else temp
 
         sharedViewModel.selectedBook.value =
-            BookModel("id_123", bookName, "Description of $bookName", null)
+            BookModel("id_123", bookName, "Description of $bookName", mutableListOf())
         supportActionBar?.title = bookName
     }
 

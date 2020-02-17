@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 
 import com.app.bookassistant.R
+import kotlinx.android.synthetic.main.fragment_add_book.*
 
 class AddBookFragment : DialogFragment() {
 
@@ -22,7 +23,10 @@ class AddBookFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        val bookName = savedInstanceState?.get("book_title") as String?
+        if (bookName != null)
+            book_title_editText.setText(bookName)
     }
+
+
 }
