@@ -59,5 +59,8 @@ dependencies {
     // opencsv
     implementation 'com.opencsv:opencsv:4.6'
 
+    //circlular image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 }

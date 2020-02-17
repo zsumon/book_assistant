@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="75dp"
-    android:layout_margin="5dp">
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingRight="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circular_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_notebook"
+            app:civ_border_color="#FF000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +37,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/circular_image"
             app:layout_constraintTop_toTopOf="@+id/circular_image"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.205" />
 
         <TextView
             android:id="@+id/textView4"
@@ -48,7 +51,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/available_book_item_title"
             app:layout_constraintTop_toBottomOf="@+id/available_book_item_title"
-            app:layout_constraintVertical_bias="0.562" />
+            app:layout_constraintVertical_bias="0.312" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
