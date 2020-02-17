@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
                 val stringBuffer = CSVUtil.readFile(file)
                 toast(stringBuffer.toString())
             } else {
-                val msg = "Null filename data received!"
+                val msg = "No file selected"
                 toast(msg)
             }
         }
@@ -164,6 +164,9 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     @TargetApi(Build.VERSION_CODES.M)
     private fun requestPermissionForFile() {
-        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            Constants.REQUEST_FOR_SDCARD_READ
+        )
     }
 }
