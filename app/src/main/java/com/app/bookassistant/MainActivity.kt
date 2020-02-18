@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     }
 
     private fun initAvailableCourseList() {
-        available_courses_list.apply {
+        available_book_recyclerview.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             availableBookAdapter = AvailableBookAdapter(this@MainActivity)
             adapter = availableBookAdapter
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     }
 
     private fun initEnrolledBookList() {
-        dashboardBookListRecyclerView.apply {
+        enrolled_book_recyclerView.apply {
             /*layoutManager = GridLayoutManager(this@MainActivity, 2)*/
             layoutManager = LinearLayoutManager(this@MainActivity)
             enrolledBookAdapter = BookListAdapter(this@MainActivity)

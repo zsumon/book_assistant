@@ -25,7 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@+id/dashboardBookListRecyclerView"
+                    app:layout_constraintBottom_toTopOf="@+id/enrolled_book_recyclerView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -35,33 +35,48 @@
                     app:title="Home"
                     app:titleTextColor="@color/White" />
 
+                <TextView
+                    android:id="@+id/enrolled_books_title_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Enrolled books"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintBottom_toTopOf="@id/enrolled_book_recyclerView"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar_bookList" />
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/dashboardBookListRecyclerView"
+                    android:id="@+id/enrolled_book_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingBottom="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar_bookList" />
+                    app:layout_constraintTop_toBottomOf="@+id/enrolled_books_title_textview" />
 
                 <TextView
                     android:id="@+id/more_books_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/White"
+                    android:fontFamily="@font/roboto_regular"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="More Available Books"
+                    android:text="More available books"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorAccent"
-                    app:layout_constraintBottom_toTopOf="@id/available_courses_list"
+                    app:layout_constraintBottom_toTopOf="@id/available_book_recyclerview"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/dashboardBookListRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@id/enrolled_book_recyclerView" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/available_courses_list"
+                    android:id="@+id/available_book_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
