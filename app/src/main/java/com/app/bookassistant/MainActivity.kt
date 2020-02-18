@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.bookassistant.data.local.BookRepository
 import com.app.bookassistant.ui.addbook.AddBookFragment
 import com.app.bookassistant.ui.chapters.ChapterActivity
 import com.app.bookassistant.ui.dashboard.AvailableBookAdapter
@@ -22,12 +23,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
-    AvailableBookAdapter.OnAvailableBookListener, AddBookFragment.OnFinalizeUploadListener {
+        AvailableBookAdapter.OnAvailableBookListener, AddBookFragment.OnFinalizeUploadListener {
 
     private lateinit var enrolledBookAdapter: BookListAdapter
     private lateinit var availableBookAdapter: AvailableBookAdapter
     private lateinit var enrolledBooks: MutableList<BookModel>
     private lateinit var availableBooks: MutableList<String>
+
+    private lateinit var bookRepository: BookRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +58,11 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     private fun initDrawers() {
         setSupportActionBar(toolbar_bookList)
         val toggle = ActionBarDrawerToggle(
-            this,
-            dl_bookList,
-            toolbar_bookList,
-            R.string.app_name,
-            R.string.app_name
+                this,
+                dl_bookList,
+                toolbar_bookList,
+                R.string.app_name,
+                R.string.app_name
         )
         toggle.isDrawerIndicatorEnabled = true
         toggle.syncState()
@@ -73,27 +76,10 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
             enrolledBookAdapter = BookListAdapter(this@MainActivity)
             adapter = enrolledBookAdapter
         }
-        enrolledBooks = mutableListOf()
-
-        var b = BookModel(
-            "cse101",
-            "Computer Fundamentals",
-            "Introduction to computers",
-            mutableListOf()
-        )
-        enrolledBooks.add(b)
-        b = BookModel(
-            "cse102",
-            "Programming & Problem Solving",
-            "Programming in C",
-            mutableListOf()
-        )
-        enrolledBooks.add(b)
-        b = BookModel("cse103", "Math", "Basic Math", mutableListOf())
-        enrolledBooks.add(b)
-        b = BookModel("cse104", "Data Structures", "Data Structures", mutableListOf())
-        enrolledBooks.add(b)
+        bookRepository = BookRepository.getInstance()
+        enrolledBooks = bookRepository.getEnrolledBooks()
         enrolledBookAdapter.supplyBookList(enrolledBooks)
+
     }
 
     override fun onBookClick(position: Int) {
@@ -167,8 +153,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     @TargetApi(Build.VERSION_CODES.M)
     private fun requestPermissionForFile() {
         requestPermissions(
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            Constants.REQUEST_FOR_SDCARD_READ
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                Constants.REQUEST_FOR_SDCARD_READ
         )
     }
 
