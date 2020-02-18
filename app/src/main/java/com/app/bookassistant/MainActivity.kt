@@ -136,13 +136,22 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         if (requestCode == Constants.SELECT_CSV_FILE && resultCode == RESULT_OK && data != null) {
             val selectedUri = data.data //The uri with the location of the file
             if (selectedUri != null) {
-                var _path = selectedUri.path
-                _path = _path?.substring(_path.indexOf(":") + 1)
+                var selectedPath = selectedUri.path
+                selectedPath = selectedPath?.substring(selectedPath.indexOf(":") + 1)
 
-                val book = CSVUtil.parseBookFromCSV(_path!!)
+                if (selectedPath.isNullOrEmpty()) {
+                    toast("Error selecting file, please try later/another book")
+                    return
+                }
+                val book = CSVUtil.parseBookFromCSV(selectedPath)
+
+                if (book == null) {
+                    toast("Error parsing book please try another one")
+                    return
+                }
                 val addBookFragment = AddBookFragment(this)
-                addBookFragment.setUploadedBookInfo(book!!)
-                addBookFragment.show(supportFragmentManager, "")
+                addBookFragment.setUploadedBookInfo(book)
+                addBookFragment.show(supportFragmentManager, "add_book_fragment")
             } else {
                 toast("No file selected")
             }
