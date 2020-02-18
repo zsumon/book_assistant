@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.fragment_exam.*
 
 class ExamMakerFragment : Fragment() {
 
-    //TODO("Set up Bottom Nav For test & chapter navigation.. in chapter activity")
-
     private lateinit var examMakerAdapter: ExamMakerAdapter
 
     override fun onCreateView(

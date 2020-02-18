@@ -19,16 +19,15 @@ import com.app.bookassistant.utils.CSVUtil
 import com.app.bookassistant.utils.Constants
 import com.app.bookassistant.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 
 
 class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     AvailableBookAdapter.OnAvailableBookListener, AddBookFragment.OnFinalizeUploadListener {
 
-    private lateinit var bookListAdapter: BookListAdapter
+    private lateinit var enrolledBookAdapter: BookListAdapter
     private lateinit var availableBookAdapter: AvailableBookAdapter
-    private lateinit var availableBooks: MutableList<String>
     private lateinit var enrolledBooks: MutableList<BookModel>
+    private lateinit var availableBooks: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +70,8 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         dashboardBookListRecyclerView.apply {
             /*layoutManager = GridLayoutManager(this@MainActivity, 2)*/
             layoutManager = LinearLayoutManager(this@MainActivity)
-            bookListAdapter = BookListAdapter(this@MainActivity)
-            adapter = bookListAdapter
+            enrolledBookAdapter = BookListAdapter(this@MainActivity)
+            adapter = enrolledBookAdapter
         }
         enrolledBooks = mutableListOf()
 
@@ -94,7 +93,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         enrolledBooks.add(b)
         b = BookModel("cse104", "Data Structures", "Data Structures", mutableListOf())
         enrolledBooks.add(b)
-        bookListAdapter.supplyBookList(enrolledBooks)
+        enrolledBookAdapter.supplyBookList(enrolledBooks)
     }
 
     override fun onBookClick(position: Int) {
@@ -110,14 +109,25 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         // notify viewModel about click and update from server/repository
     }
 
+    override fun onDeleteClick(bookPosition: Int) {
+        availableBooks.add(enrolledBooks[bookPosition].title)
+        enrolledBooks.removeAt(bookPosition)
+        availableBookAdapter.notifyDataSetChanged()
+        enrolledBookAdapter.notifyDataSetChanged()
+    }
+
     override fun onAvailableBookClick(position: Int) {
         // now add this to enrolled class..
         val str = availableBooks[position]
-        availableBookAdapter.removeItem(position)
+        // availableBookAdapter.removeItem(position)
+
+        availableBooks.removeAt(position)
+        availableBookAdapter.notifyDataSetChanged()
+
         val b = BookModel("id_123", str, str, mutableListOf())
 
         enrolledBooks.add(b)
-        bookListAdapter.notifyDataSetChanged()
+        enrolledBookAdapter.notifyDataSetChanged()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

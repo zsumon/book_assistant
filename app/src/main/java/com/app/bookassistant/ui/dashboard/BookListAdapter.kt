@@ -69,12 +69,13 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
 
         private val bookTitle = itemView.book_title
         private val bookDescriptor = itemView.book_description
-        private val moreBtn = itemView.sync_img
+        private val sync_btn = itemView.sync_img
         private val bookItemLayout = itemView.bookItemLayout
 
         init {
             itemView.setOnClickListener(this)
             itemView.sync_img.setOnClickListener(this)
+            itemView.delete_enrolled_book_imageView.setOnClickListener(this)
         }
 
         fun bind(book: BookModel) {
@@ -91,11 +92,17 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
         }
 
         override fun onClick(v: View?) {
-            if (v?.id == R.id.sync_img) {
-                onBookListener.onUpdateButtonClick(adapterPosition, v.id)
-            } else {
-                Log.d("TAG", " view id is: " + v?.id.toString())
-                onBookListener.onBookClick(adapterPosition)
+            when (v?.id) {
+                R.id.sync_img -> {
+                    onBookListener.onUpdateButtonClick(adapterPosition, v.id)
+                }
+                R.id.delete_enrolled_book_imageView -> {
+                    onBookListener.onDeleteClick(adapterPosition)
+                }
+                else -> {
+                    Log.d("TAG", " view id is: " + v?.id.toString())
+                    onBookListener.onBookClick(adapterPosition)
+                }
             }
         }
     }
@@ -103,6 +110,7 @@ class BookListAdapter(private val onBookListener: OnBookListener) :
     interface OnBookListener {
         fun onBookClick(position: Int)
         fun onUpdateButtonClick(bookPosition: Int, menuId: Int)
+        fun onDeleteClick(bookPosition: Int)
     }
 
 }

@@ -71,21 +71,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+
             android:id="@+id/imageView4"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_draw_pencil"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/delete_enrolled_book_imageView"
             app:layout_constraintHorizontal_bias="0.018"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/delete_enrolled_book_imageView"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/delete_enrolled_book_imageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_dustbin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/sync_img"

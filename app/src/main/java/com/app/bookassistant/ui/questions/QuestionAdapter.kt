@@ -46,7 +46,7 @@ class QuestionAdapter(private val onQuestionClickListener: OnQuestionClickListen
         }
 
         fun bind(questionModel: QuestionModel) {
-            // TODO
+
         }
 
         override fun onClick(v: View?) {
