@@ -10,7 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bookassistant.R
+import com.app.bookassistant.ui.dashboard.BookModel
 import com.app.bookassistant.ui.questions.QuestionFragment
+import com.app.bookassistant.utils.Constants
+import com.app.bookassistant.utils.toast
 import im.dacer.androidcharts.LineView
 import kotlinx.android.synthetic.main.fragment_chapter.*
 import java.util.ArrayList
@@ -30,23 +33,18 @@ class ChapterFragment : Fragment(), ChapterAdapter.OnChapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*val title = "Chapters"
-        (activity as AppCompatActivity?)?.supportActionBar?.title = title*/
-
-        initChapterRecyclerView()
+        val bookFromBundle = arguments!![Constants.BOOK_ARG_KEY] as BookModel
+        initChapterRecyclerView(bookFromBundle)
         initLineChart(view)
     }
 
-    private fun initChapterRecyclerView() {
-        val items = mutableListOf<ChapterModel>()
-        for (i in 0..10) {
-            val ch = ChapterModel()
-            ch.apply {
-                chapterTitle = "Chapter ${i + 1}"
-                chapterDescripton = "Description of Chapter ${i + 1}"
-            }
-            items.add(ch)
-        }
+    private fun initChapterRecyclerView(selectedBook: BookModel) {
+
+        //  toast("selected book from bundle: ${selectedBook.title}!!")
+        val items = selectedBook.chapters
+
+        toast("total chapters: ${items.size}")
+
         chapter_recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             chapterAdapter = ChapterAdapter(this@ChapterFragment)

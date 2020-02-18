@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import com.app.bookassistant.R
 import com.app.bookassistant.ui.dashboard.BookModel
@@ -22,6 +23,7 @@ class ChapterActivity : AppCompatActivity() {
         sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
         fragmentTransaction()
+
         initToolbar()
         initBottomNav()
         _getIntent()
@@ -40,8 +42,12 @@ class ChapterActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = ChapterFragment()
+
+        fragment.arguments = intent.extras
         fragmentTransaction.replace(R.id.chapter_fragment_container_frameLayout, fragment)
         fragmentTransaction.commit()
+
+
     }
 
     private fun initToolbar() {

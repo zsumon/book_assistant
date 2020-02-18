@@ -44,9 +44,8 @@ class AddBookFragment(private val onFinalizeUploadListener: OnFinalizeUploadList
         total_questions_textView.text = "Total Questions:  $totalQuestion"
 
         finalize_book_upload.setOnClickListener {
-            onFinalizeUploadListener.onFinalUploadClick(uploadedBook.apply {
-                title = book_title_editText.text.toString()
-            })
+            uploadedBook.title = book_title_editText.text.toString()
+            onFinalizeUploadListener.onFinalUploadClick(uploadedBook)
             dialog?.dismiss()
         }
 
