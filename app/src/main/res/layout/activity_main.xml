@@ -45,7 +45,7 @@
                     android:padding="5dp"
                     android:text="Enrolled books"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/Green"
                     app:layout_constraintBottom_toTopOf="@id/enrolled_book_recyclerView"
                     app:layout_constraintTop_toBottomOf="@id/toolbar_bookList" />
 

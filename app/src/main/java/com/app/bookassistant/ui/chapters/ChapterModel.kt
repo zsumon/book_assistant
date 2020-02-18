@@ -5,7 +5,7 @@ import java.io.Serializable
 class ChapterModel : Serializable {
     var chapterTitle: String = ""
     var chapterDescripton: String = ""
-    var chapterQuestions: List<QuestionModel> = mutableListOf()
+    var chapterQuestions: MutableList<QuestionModel> = mutableListOf()
 
     class QuestionModel : Serializable {
         var questionTitle: String = ""
