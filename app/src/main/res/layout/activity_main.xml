@@ -44,9 +44,10 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Enrolled books"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/Green"
                     app:layout_constraintBottom_toTopOf="@id/enrolled_book_recyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/toolbar_bookList" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -67,7 +68,7 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="More available books"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorAccent"
                     app:layout_constraintBottom_toTopOf="@id/available_book_recyclerview"
                     app:layout_constraintEnd_toEndOf="parent"
