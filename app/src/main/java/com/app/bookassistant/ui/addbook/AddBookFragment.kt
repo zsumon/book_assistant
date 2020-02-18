@@ -27,6 +27,7 @@ class AddBookFragment(private val onFinalizeUploadListener: OnFinalizeUploadList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_add_book)
         /*if (arguments != null) {
             val bookName = arguments!!.getString("book_title")
             Toast.makeText(activity, "bundle: text: ${bookName}", Toast.LENGTH_LONG).show()

@@ -55,8 +55,13 @@ class CSVUtil {
                     if (nextLine[0] == "book_name") {
                         book = BookModel("id123", nextLine[1], "Description", mutableListOf())
                     } else if (nextLine[0].contains("chapter_")) {
+                        val chTitle = nextLine[1]
+                        val chDesc = nextLine[2]
                         book?.chapters?.add(ChapterModel().apply {
-                            chapterQuestions = readQuestions(csvReader)
+                            chapterQuestions = readQuestions(csvReader).apply {
+                                chapterTitle = chTitle
+                                chapterDescripton = chDesc
+                            }
                         })
                     }
                     nextLine = csvReader.readNext()
