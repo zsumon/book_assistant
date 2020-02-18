@@ -41,6 +41,18 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         initDrawers()
 
         initAvailableCourseList()
+        setUpMoreButtonClick()
+    }
+
+    private fun setUpMoreButtonClick() {
+        available_book_recyclerview.visibility = View.INVISIBLE
+        more_books_textview.setOnClickListener {
+            if (available_book_recyclerview.visibility == View.VISIBLE) {
+                available_book_recyclerview.visibility = View.INVISIBLE
+            } else {
+                available_book_recyclerview.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun initAvailableCourseList() {
