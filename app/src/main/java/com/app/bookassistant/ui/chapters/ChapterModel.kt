@@ -1,11 +1,13 @@
 package com.app.bookassistant.ui.chapters
 
-class ChapterModel {
+import java.io.Serializable
+
+class ChapterModel : Serializable {
     var chapterTitle: String = ""
     var chapterDescripton: String = ""
     var chapterQuestions: List<QuestionModel> = mutableListOf()
 
-    class QuestionModel {
+    class QuestionModel : Serializable {
         var questionTitle: String = ""
         var options: MutableList<String> = mutableListOf()
         var correctAnswer: Int = -1

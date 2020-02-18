@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     private lateinit var enrolledBookAdapter: BookListAdapter
     private lateinit var availableBookAdapter: AvailableBookAdapter
     private lateinit var enrolledBooks: MutableList<BookModel>
-    private lateinit var availableBooks: MutableList<String>
+    private lateinit var availableBooks: MutableList<BookModel>
 
     private lateinit var bookRepository: BookRepository
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
             adapter = availableBookAdapter
         }
 
-        val items = mutableListOf("Data Mining", "Computer Graphics", "Introduction to Algorithms")
+        val items = bookRepository.getAvailableBooks()
         availableBooks = items
         availableBookAdapter.supplyList(items)
 
@@ -86,10 +86,10 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     override fun onBookClick(position: Int) {
 
         val intent = Intent(this, ChapterActivity::class.java)
-        val clickedBook = enrolledBooks[position].title
-        intent.putExtra("book_name", clickedBook)
+        val clickedBook = enrolledBooks[position]
+        intent.putExtra("book_name", clickedBook.title)
 
-        val bundle = bundleOf(Constants.BOOK_ARG_KEY to enrolledBooks[position])
+        val bundle = bundleOf(Constants.BOOK_ARG_KEY to clickedBook)
 
         intent.putExtras(bundle)
         startActivity(intent)
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
     }
 
     override fun onDeleteClick(bookPosition: Int) {
-        availableBooks.add(enrolledBooks[bookPosition].title)
+        availableBooks.add(enrolledBooks[bookPosition])
         enrolledBooks.removeAt(bookPosition)
         availableBookAdapter.notifyDataSetChanged()
         enrolledBookAdapter.notifyDataSetChanged()
@@ -109,15 +109,12 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     override fun onAvailableBookClick(position: Int) {
         // now add this to enrolled class..
-        val str = availableBooks[position]
-        // availableBookAdapter.removeItem(position)
+        val clickedBook = availableBooks[position]
 
         availableBooks.removeAt(position)
         availableBookAdapter.notifyDataSetChanged()
 
-        val b = BookModel("id_123", str, str, mutableListOf())
-
-        enrolledBooks.add(b)
+        enrolledBooks.add(clickedBook)
         enrolledBookAdapter.notifyDataSetChanged()
     }
 
@@ -165,7 +162,7 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
 
     override fun onFinalUploadClick(book: BookModel) {
         toast("New book added under available books.")
-        availableBooks.add(book.title)
+        availableBooks.add(book)
         availableBookAdapter.notifyDataSetChanged()
     }
 }

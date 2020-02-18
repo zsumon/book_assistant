@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_available_book.view.*
 class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    lateinit var availableBook: MutableList<String>
+    lateinit var availableBook: MutableList<BookModel>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AvailableViewHolder(
@@ -37,7 +37,7 @@ class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookL
 
     }
 
-    fun supplyList(items: MutableList<String>) {
+    fun supplyList(items: MutableList<BookModel>) {
         availableBook = items
     }
 
@@ -49,8 +49,8 @@ class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookL
     }
 
     class AvailableViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(bookName: String) {
-            itemView.available_book_item_title.text = bookName
+        fun bind(book: BookModel) {
+            itemView.available_book_item_title.text = book.title
         }
     }
 
