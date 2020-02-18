@@ -48,8 +48,10 @@ class MainActivity : AppCompatActivity(), BookListAdapter.OnBookListener,
         available_book_recyclerview.visibility = View.INVISIBLE
         more_books_textview.setOnClickListener {
             if (available_book_recyclerview.visibility == View.VISIBLE) {
+                expand_collapse_more_imageView.setImageResource(R.drawable.ic_expand_more_black_24dp)
                 available_book_recyclerview.visibility = View.INVISIBLE
             } else {
+                expand_collapse_more_imageView.setImageResource(R.drawable.ic_expand_less_black_24dp)
                 available_book_recyclerview.visibility = View.VISIBLE
             }
         }
