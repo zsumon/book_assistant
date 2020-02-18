@@ -1,5 +1,6 @@
 package com.app.bookassistant.ui.dashboard
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.app.bookassistant.MainActivity
 import com.app.bookassistant.R
 import kotlinx.android.synthetic.main.dialog_confirm_enroll_book.*
 import kotlinx.android.synthetic.main.item_available_book.view.*
@@ -36,10 +38,15 @@ class AvailableBookAdapter(private val onAvailableBookListener: OnAvailableBookL
             is AvailableViewHolder -> {
                 holder.bind(availableBook[position])
                 holder.itemView.setOnClickListener {
-                    ConfirmEnrollBookDialog(this, position).show(
-                        (onAvailableBookListener as AppCompatActivity).supportFragmentManager,
-                        "show_available_book_to_enroll_confirm_dialog"
-                    )
+
+                    val context = onAvailableBookListener as MainActivity
+                    if (context != null)
+                        ConfirmEnrollBookDialog(this, position).show(
+                            context.supportFragmentManager,
+                            "show_available_book_to_enroll_confirm_dialog"
+                        )
+
+
                 }
             }
         }
@@ -80,6 +87,11 @@ public class ConfirmEnrollBookDialog(
     private val onDialogListener: OnDialogListener,
     private val position: Int
 ) : DialogFragment() {
+
+    init {
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
